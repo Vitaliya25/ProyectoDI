@@ -32,8 +32,9 @@ import java.util.Locale
 fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
 
     var context = LocalContext.current
+    // Recuperamos los datos del usuario desde el almacenamiento persistente
     var usuario = PersistUsuario(context).obtenerUsuario()
-
+    //Variables para almacenar los valores anteriores y actuales de la prueba
     var resultadoAnt by remember { mutableStateOf("") }
     var notaAnt by remember { mutableStateOf("") }
     var fechaAnt by remember { mutableStateOf("") }
@@ -42,19 +43,21 @@ fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
     var notaAct by remember { mutableStateOf("") }
 
     val calificador = Calificador()
-
+    // Recuperamos la lista de datos de pruebas guardados
     val listaDeDatosPrueba = PersistDatosPrueba.getDatosPrueba(context)
+    // Buscamos los datos de la prueba actual usando el nombre
     val datosPrueba = listaDeDatosPrueba.find { it.nombre == nombre }
         ?: DatosPrueba(nombre = nombre, resultado = 0.0, nota = 0.0, fecha = "")
 
-    // Asignamos los valores de la prueba encontrada o inicializamos con valores por defecto
+    // Asignamos los valores iniciales de la prueba (si existen)
     resultadoAnt = datosPrueba.resultado.toString()
     notaAnt = datosPrueba.nota.toString()
     fechaAnt = datosPrueba.fecha
 
-    // Obtener la lista de resultados para la prueba seleccionada desde Calificador
+    // Obtenemos los resultados de la prueba usando los datos del usuario
     val resultadosPrueba = calificador.obtenerResultadosPrueba(usuario.edad, usuario.genero, nombre)
 
+    // Función para calcular la nueva nota según el resultado introducido
     fun calcularNuevaNota() {
         // Primero, calculamos la nueva nota usando el calificador
         val resultadoDouble = resultadoAct.toDoubleOrNull() ?: 0.0 // Convertir el resultado a Double

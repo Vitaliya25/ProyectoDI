@@ -45,11 +45,13 @@ import com.example.composecatalog.model.Usuario
 
 @Composable
 fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateBack: () -> Unit) {
+    // Variables de estado para los datos del usuario (edad, peso, altura, etc
     var edad by remember { mutableStateOf("") }
     var peso by remember { mutableStateOf("") }
     var altura by remember { mutableStateOf("") }
     var sexo by remember { mutableStateOf("H") }
     var imc by remember { mutableStateOf("") }
+
     var mostrarDialogo by remember { mutableStateOf(false) }
     var mostrarDialogoPruebas by remember { mutableStateOf(false) }
 
@@ -68,6 +70,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
         }
     }
 
+    // Función para calcular el IMC (Índice de Masa Corporal)
     fun calcularIMC() {
         if (peso.isNotEmpty() && altura.isNotEmpty()) {
             try {
@@ -88,6 +91,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
         }
     }
 
+    // Pantalla principal del usuario
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -304,8 +308,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
         Spacer(modifier = Modifier.weight(1f))
     }
 
-
-
+    // Mostrar el diálogo con el resultado del IMC si se calcula
     if (mostrarDialogo) {
         pruebas = PersistDatosPrueba.getDatosPrueba(context)
         AlertDialog(modifier = Modifier
@@ -346,6 +349,8 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
         )
     }
 
+
+    // Mostrar el diálogo con las ultimas pruebas realizadas
     if (mostrarDialogoPruebas) {
         AlertDialog(
             modifier = Modifier.fillMaxWidth()

@@ -42,12 +42,15 @@ import com.example.composecatalog.model.Usuario
 fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
 
     val context = LocalContext.current
+    // Crear una instancia de PersistUsuario para manejar el almacenamiento local
     var pUsuario: PersistUsuario = remember { PersistUsuario(context) }
+    // Variables de estado para el nombre de usuario, contraseña y otros controles
     var nombreUsuario by remember { mutableStateOf(pUsuario.getNombre()) }
     var contrasena by remember { mutableStateOf("") }
     var restablecerContrasena by remember { mutableStateOf(false) }
     var nuevaContrasena by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
+    // Obtener información del usuario guardado
     var usuario = pUsuario.obtenerUsuario()
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {

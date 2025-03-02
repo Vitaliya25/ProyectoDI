@@ -24,6 +24,7 @@ import com.example.composecatalog.R
 
 @Composable
 fun Inicio(navigateToLogin: () -> Unit) {
+    // Se crea una columna que contiene todos los elementos de la pantalla.
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         ) {

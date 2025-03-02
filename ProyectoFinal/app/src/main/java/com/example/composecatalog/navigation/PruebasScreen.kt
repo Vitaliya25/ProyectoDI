@@ -54,9 +54,10 @@ fun PruebasScreen(
     navigateBack: () -> Unit
 ) {
     val edad = prueba.toIntOrNull() ?: 0
-
+// Estado para manejar el tipo de prueba seleccionado y la visibilidad del menú desplegable.
     var tipoSeleccionado by remember { mutableStateOf("Todas") }
     var expandido by remember { mutableStateOf(false) }
+    // Lista de tipos de prueba que se pueden seleccionar.
     val tipos = listOf("Todas", "Resistencia", "Flexibilidad", "Fuerza muscular", "Velocidad")
 
 
@@ -71,7 +72,7 @@ fun PruebasScreen(
             color = colorResource(R.color.azulTexto)
         )
         Spacer(modifier = Modifier.height(16.dp))
-
+        // Caja de texto con un menú desplegable para seleccionar el tipo de prueba
         Box(
             modifier = Modifier.fillMaxWidth()
                 .weight(1f)
@@ -91,7 +92,7 @@ fun PruebasScreen(
                     color = colorResource(R.color.azulTextoOscuro)
                 )
             )
-
+            // Menú desplegable que muestra los tipos de prueba
             DropdownMenu(
                 expanded = expandido,
                 onDismissRequest = { expandido = false },
@@ -114,6 +115,7 @@ fun PruebasScreen(
                 }
             }
         }
+        // Sección para mostrar las pruebas filtradas según el tipo seleccionado
         Row(modifier = Modifier.weight(12f))
         {
             ListarPruebas(edad, tipoSeleccionado, navigateToDatosPrueba);
@@ -141,7 +143,7 @@ fun PruebasScreen(
 @Composable
 fun PruebaItem(prueba: Prueba, onItemSelected: (String) -> Unit) {
     val uriHandler = LocalUriHandler.current
-
+    // Card que muestra la prueba con imagen y nombre
     Card(
         border = BorderStroke(2.dp, color = Color.Gray),
         modifier = Modifier
@@ -244,26 +246,12 @@ fun ListarPruebas(edad: Int, tipo: String, navigateToDatosPrueba: (String) -> Un
 }
 
 fun getPruebas(): List<Prueba> {
+    // Lista de pruebas predefinidas con su nombre, tipo, imagen y enlace
     return listOf(
         Prueba("testCooper", "Resistencia", R.drawable.test_cooper, "https://www.palabraderunner.com/test-de-cooper/"),
         Prueba("flexibilidad", "Flexibilidad", R.drawable.flexibilidad, "https://www.naradigital.es/blog/detalle-noticias/3005/como-preparar-el-test-de-flexibilidad"),
         Prueba("abdominales", "Fuerza muscular", R.drawable.abdominal, "https://altorendimiento.com/prueba-de-abdominales/?srsltid=AfmBOorS_9S_7NRBGSR2h_IT3MlN2WSrWkG-QTW10Sp9nwPalim3E8zv"),
         Prueba("velocidad", "Velocidad", R.drawable.velocidad, "http://cdeporte.rediris.es/revista/revista13/velocidad.htm"),
         Prueba("balon", "Fuerza muscular", R.drawable.balon, "https://efisicas.com/tutorial-balon-medicinal-oposiciones/"),
-    )
-}
-
-@Composable
-fun abrirActividad(url: String, texto: String) {
-    val uriHandler = LocalUriHandler.current
-
-    Text(
-        text = texto,
-        fontSize = 13.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.Magenta,
-        modifier = Modifier
-            .padding(8.dp)
-            .clickable { uriHandler.openUri(url) }
     )
 }
