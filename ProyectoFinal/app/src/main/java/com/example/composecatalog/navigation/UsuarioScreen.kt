@@ -1,6 +1,7 @@
 package com.example.composecatalog.navigation
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -59,7 +61,6 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
     val pUsuario = remember { PersistUsuario(context) }
     val usuario = pUsuario.obtenerUsuario()
     var pruebas = PersistDatosPrueba.getDatosPrueba(context)
-    println(pruebas.toString())
     // Si hay un usuario guardado, asigna sus valores a las variables de estado
     LaunchedEffect(usuario) {
         if (usuario != null) {
@@ -94,7 +95,8 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
 
     // Pantalla principal del usuario
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(40.dp))

@@ -2,6 +2,7 @@ package com.example.composecatalog.navigation
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +22,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +66,10 @@ fun PruebasScreen(
     var pruebaSel by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.background),
+
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
@@ -75,22 +80,23 @@ fun PruebasScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-
-        // Caja de búsqueda
-        OutlinedTextField(
-            value = pruebaSel,
-            onValueChange = { pruebaSel = it },
-            label = { Text("Buscar prueba...") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            textStyle = TextStyle(fontSize = 18.sp, color = colorResource(R.color.azulTextoOscuro)),
-        )
+//
+//        // Caja de búsqueda
+//        OutlinedTextField(
+//            value = pruebaSel,
+//            onValueChange = { pruebaSel = it },
+//            label = { Text("Buscar prueba...") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(horizontal = 16.dp),
+//            textStyle = TextStyle(fontSize = 18.sp, color = colorResource(R.color.azulTextoOscuro)),
+//        )
 
 
         // Caja de texto con un menú desplegable para seleccionar el tipo de prueba
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .weight(1f)
         ) {
             OutlinedTextField(
@@ -117,12 +123,15 @@ fun PruebasScreen(
                     .padding(horizontal = 16.dp)
             ) {
                 tipos.forEach { tipo ->
-                    DropdownMenuItem(text = { Text(text = tipo,
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            color = Color.Black
+                    DropdownMenuItem(text = {
+                        Text(
+                            text = tipo,
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                color = Color.Black
+                            )
                         )
-                    ) },
+                    },
                         onClick = {
                             expandido = false
                             tipoSeleccionado = tipo
@@ -228,7 +237,7 @@ fun ListarPruebas(edad: Int, tipo: String, navigateToDatosPrueba: (String) -> Un
     }
 
 
-    Column(){
+    Column() {
         Spacer(modifier = Modifier.height(20.dp))
         LazyColumn(
             state = rvState,
@@ -267,10 +276,35 @@ fun ListarPruebas(edad: Int, tipo: String, navigateToDatosPrueba: (String) -> Un
 fun getPruebas(): List<Prueba> {
     // Lista de pruebas predefinidas con su nombre, tipo, imagen y enlace
     return listOf(
-        Prueba("testCooper", "Resistencia", R.drawable.test_cooper, "https://www.palabraderunner.com/test-de-cooper/"),
-        Prueba("flexibilidad", "Flexibilidad", R.drawable.flexibilidad, "https://www.naradigital.es/blog/detalle-noticias/3005/como-preparar-el-test-de-flexibilidad"),
-        Prueba("abdominales", "Fuerza muscular", R.drawable.abdominal, "https://altorendimiento.com/prueba-de-abdominales/?srsltid=AfmBOorS_9S_7NRBGSR2h_IT3MlN2WSrWkG-QTW10Sp9nwPalim3E8zv"),
-        Prueba("velocidad", "Velocidad", R.drawable.velocidad, "http://cdeporte.rediris.es/revista/revista13/velocidad.htm"),
-        Prueba("balon", "Fuerza muscular", R.drawable.balon, "https://efisicas.com/tutorial-balon-medicinal-oposiciones/"),
+        Prueba(
+            "testCooper",
+            "Resistencia",
+            R.drawable.test_cooper,
+            "https://www.palabraderunner.com/test-de-cooper/"
+        ),
+        Prueba(
+            "flexibilidad",
+            "Flexibilidad",
+            R.drawable.flexibilidad,
+            "https://www.naradigital.es/blog/detalle-noticias/3005/como-preparar-el-test-de-flexibilidad"
+        ),
+        Prueba(
+            "abdominales",
+            "Fuerza muscular",
+            R.drawable.abdominal,
+            "https://altorendimiento.com/prueba-de-abdominales/?srsltid=AfmBOorS_9S_7NRBGSR2h_IT3MlN2WSrWkG-QTW10Sp9nwPalim3E8zv"
+        ),
+        Prueba(
+            "velocidad",
+            "Velocidad",
+            R.drawable.velocidad,
+            "http://cdeporte.rediris.es/revista/revista13/velocidad.htm"
+        ),
+        Prueba(
+            "balon",
+            "Fuerza muscular",
+            R.drawable.balon,
+            "https://efisicas.com/tutorial-balon-medicinal-oposiciones/"
+        ),
     )
 }

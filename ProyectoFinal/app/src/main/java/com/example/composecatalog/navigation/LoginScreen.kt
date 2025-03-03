@@ -1,6 +1,7 @@
 package com.example.composecatalog.navigation
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -44,7 +45,10 @@ import com.example.composecatalog.model.ThemeViewModel
 import com.example.composecatalog.model.Usuario
 
 @Composable
-fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
+fun LoginScreen(
+    navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit,
+    onThemeToggle: () -> Unit
+) {
 
     val context = LocalContext.current
     // Crear una instancia de PersistUsuario para manejar el almacenamiento local
@@ -58,9 +62,22 @@ fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
     // Obtener información del usuario guardado
     var usuario = pUsuario.obtenerUsuario()
 
+    var isDarkMode by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
+    Column(modifier = Modifier.fillMaxSize()
+        .background(MaterialTheme.colorScheme.background),
+        horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Switch(
+                checked = isDarkMode,
+                onCheckedChange = {
+                    isDarkMode = it
+                    onThemeToggle()
+                }
+            )
+        }
 
         Spacer(modifier = Modifier.height(30.dp))
 

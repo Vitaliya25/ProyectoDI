@@ -9,15 +9,18 @@ import kotlin.reflect.typeOf
 
 @Composable
 
-fun NavigationWrapper() {
+fun NavigationWrapper(onThemeToggle: () -> Unit ) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Inicio) {
         composable<Inicio> {
             Inicio { navController.navigate(Login) }
         }
         composable<Login> {
-            LoginScreen({ name -> navController.navigate(Usuario(name = name)) },
-                { navController.popBackStack() })
+            LoginScreen(
+                { name -> navController.navigate(Usuario(name = name)) },
+                { navController.popBackStack() },
+                onThemeToggle = onThemeToggle
+            )
         }
         composable<Usuario> { backStackEntry ->
             val usuario = backStackEntry.toRoute<Usuario>()

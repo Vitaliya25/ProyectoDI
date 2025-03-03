@@ -1,5 +1,6 @@
 package com.example.composecatalog.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -60,14 +61,17 @@ fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
     // Función para calcular la nueva nota según el resultado introducido
     fun calcularNuevaNota() {
         // Primero, calculamos la nueva nota usando el calificador
-        val resultadoDouble = resultadoAct.toDoubleOrNull() ?: 0.0 // Convertir el resultado a Double
-        val nuevaNota = calificador.obtenerNota(usuario.edad, usuario.genero, resultadoDouble, nombre)
+        val resultadoDouble =
+            resultadoAct.toDoubleOrNull() ?: 0.0 // Convertir el resultado a Double
+        val nuevaNota =
+            calificador.obtenerNota(usuario.edad, usuario.genero, resultadoDouble, nombre)
 
         // Si obtenemos una nota válida, la asignamos a notaAct
         if (nuevaNota != null) {
             notaAct = nuevaNota.toString()
         } else {
-            notaAct = "0" // Si la nota es nula, asignamos un valor predeterminado (puedes manejarlo de otra manera)
+            notaAct =
+                "0" // Si la nota es nula, asignamos un valor predeterminado (puedes manejarlo de otra manera)
         }
     }
 
@@ -83,7 +87,7 @@ fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
             nombre = nombre,
             resultado = resultadoAct.toDoubleOrNull() ?: 0.0,  // Usamos el nuevo resultado
             nota = notaAct.toDoubleOrNull() ?: 0.0,  // Usamos la nueva nota calculada
-            fecha = fechaActual  
+            fecha = fechaActual
         )
 
         // Actualizamos la lista de datos, reemplazando el que tiene el mismo nombre
@@ -106,7 +110,9 @@ fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background),
+
         horizontalAlignment = Alignment.Start
     ) {
         Spacer(modifier = Modifier.height(50.dp))
@@ -176,7 +182,9 @@ fun DatosPruebaScreen(nombre: String, navigateBack: () -> Unit) {
         Spacer(modifier = Modifier.padding(10.dp))
 
         Box(
-            modifier = Modifier.fillMaxWidth().align(Alignment.Start),
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Start),
         ) {
 
             Button(
