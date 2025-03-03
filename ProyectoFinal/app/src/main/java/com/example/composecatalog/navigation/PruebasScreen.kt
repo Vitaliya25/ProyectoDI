@@ -47,6 +47,7 @@ import com.example.composecatalog.R
 import com.example.composecatalog.model.Prueba
 import kotlinx.coroutines.launch
 
+
 @Composable
 fun PruebasScreen(
     prueba: String,
@@ -60,6 +61,7 @@ fun PruebasScreen(
     // Lista de tipos de prueba que se pueden seleccionar.
     val tipos = listOf("Todas", "Resistencia", "Flexibilidad", "Fuerza muscular", "Velocidad")
 
+    var pruebaSel by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -72,6 +74,20 @@ fun PruebasScreen(
             color = colorResource(R.color.azulTexto)
         )
         Spacer(modifier = Modifier.height(16.dp))
+
+
+        // Caja de búsqueda
+        OutlinedTextField(
+            value = pruebaSel,
+            onValueChange = { pruebaSel = it },
+            label = { Text("Buscar prueba...") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            textStyle = TextStyle(fontSize = 18.sp, color = colorResource(R.color.azulTextoOscuro)),
+        )
+
+
         // Caja de texto con un menú desplegable para seleccionar el tipo de prueba
         Box(
             modifier = Modifier.fillMaxWidth()
@@ -199,8 +215,10 @@ fun ListarPruebas(edad: Int, tipo: String, navigateToDatosPrueba: (String) -> Un
     val pruebasAmostrar = when {
         edad < 14 -> getPruebas().take(3)  // Mostrar solo las primeras 3 pruebas
         edad == 14 -> getPruebas().take(4)  // Mostrar las primeras 4 pruebas
+
         else -> getPruebas()  // Mostrar todas las pruebas
     }
+
 
     // Filtrar las pruebas según el tipo de prueba seleccionado
     val pruebasFiltradas = if (tipo == "Todas") {
@@ -208,6 +226,7 @@ fun ListarPruebas(edad: Int, tipo: String, navigateToDatosPrueba: (String) -> Un
     } else {
         pruebasAmostrar.filter { it.tipo == tipo }
     }
+
 
     Column(){
         Spacer(modifier = Modifier.height(20.dp))

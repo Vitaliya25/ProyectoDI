@@ -91,6 +91,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
         }
     }
 
+
     // Pantalla principal del usuario
     Column(
         modifier = Modifier.fillMaxSize(),

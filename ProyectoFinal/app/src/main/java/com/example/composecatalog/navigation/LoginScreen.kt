@@ -1,23 +1,26 @@
 package com.example.composecatalog.navigation
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.widget.Toast
+
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,9 +36,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composecatalog.R
 import com.example.composecatalog.R.color.azulTexto
 import com.example.composecatalog.model.PersistUsuario
+import com.example.composecatalog.model.ThemeViewModel
 import com.example.composecatalog.model.Usuario
 
 @Composable
@@ -53,11 +58,15 @@ fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
     // Obtener información del usuario guardado
     var usuario = pUsuario.obtenerUsuario()
 
+
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+
         Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "INICIO DE SESION", fontSize = 25.sp, fontWeight = FontWeight.Bold,
-            color = colorResource(R.color.azulTexto)
+            color = colorResource(azulTexto)
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -143,7 +152,7 @@ fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
 
                         },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(R.color.azulTexto),
+                            containerColor = colorResource(azulTexto),
                         ),
                         modifier = Modifier.size(150.dp, 50.dp)
                     ) {
@@ -181,7 +190,7 @@ fun LoginScreen(navigateToUsuario: (String) -> Unit, navigateBack: () -> Unit) {
                 }
             },
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.azulTexto),
+                containerColor = colorResource(azulTexto),
             ),
             modifier = Modifier
                 .size(200.dp, 50.dp)
