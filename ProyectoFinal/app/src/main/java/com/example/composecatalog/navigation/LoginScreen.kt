@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,6 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -64,10 +66,9 @@ fun LoginScreen(
 
     var isDarkMode by remember { mutableStateOf(false) }
 
-
-    Column(modifier = Modifier.fillMaxSize()
+    Column(modifier = Modifier.fillMaxSize().padding(20.dp)
         .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.Start) {
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Switch(
@@ -87,20 +88,31 @@ fun LoginScreen(
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        Text(text = "USUARIO", fontSize = 20.sp)
-        TextField(
+        Text( text = "USUARIO", fontSize = 22.sp,
+            modifier = Modifier.padding(10.dp))
+        TextField(modifier = Modifier.fillMaxWidth(),
             value = nombreUsuario,
             onValueChange = { nombreUsuario = it },
-            singleLine = true
+            singleLine = true,
+            textStyle = TextStyle(
+                fontSize = 22.sp, // Tamaño de la letra
+                fontWeight = FontWeight.Normal
+            )
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        Text(text = "CONTRASEÑA", fontSize = 20.sp)
-        TextField(
+        Text(text = "CONTRASEÑA", fontSize = 22.sp,
+            modifier = Modifier.padding(10.dp))
+        TextField(modifier = Modifier.fillMaxWidth(),
             value = contrasena,
-            onValueChange = { contrasena = it },
+            onValueChange = { contrasena = it
+                            errorMessage = ""},
             singleLine = true,
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            textStyle = TextStyle(
+                fontSize = 22.sp, // Tamaño de la letra
+                fontWeight = FontWeight.Normal
+            )
         )
 
         // Mostrar mensaje de error si la contraseña es incorrecta
@@ -108,7 +120,7 @@ fun LoginScreen(
             Text(
                 text = errorMessage,
                 color = Color.Red,
-                fontSize = 14.sp
+                fontSize = 25.sp
             )
         }
 
@@ -117,7 +129,7 @@ fun LoginScreen(
         TextButton(onClick = { restablecerContrasena = true }) {
             Text(
                 text = "¿Has olvidado la contraseña?",
-                fontSize = 20.sp,
+                fontSize = 25.sp,
                 fontWeight = FontWeight.Bold
             )
         }
@@ -134,7 +146,7 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = "Restablecer contraseña",
-                        fontSize = 20.sp,
+                        fontSize = 22.sp,
                         fontWeight = FontWeight.Bold
                     )
 
@@ -146,6 +158,10 @@ fun LoginScreen(
                         onValueChange = { nuevaContrasena = it },
                         label = { Text("Nueva Contraseña") },
                         singleLine = true,
+                        textStyle = TextStyle(
+                            fontSize = 22.sp, // Tamaño de la letra
+                            fontWeight = FontWeight.Normal
+                        )
                         //visualTransformation = PasswordVisualTransformation() // Ocultar la nueva contraseña
                     )
 
@@ -210,7 +226,7 @@ fun LoginScreen(
                 containerColor = colorResource(azulTexto),
             ),
             modifier = Modifier
-                .size(200.dp, 50.dp)
+                .size(160.dp, 50.dp)
                 .clip(RoundedCornerShape(3.dp))
         ) {
             Text(
@@ -227,7 +243,7 @@ fun LoginScreen(
                 containerColor = colorResource(azulTexto)
             ),
             modifier = Modifier
-                .size(150.dp, 50.dp)
+                .size(160.dp, 50.dp)
         )
         {
             Text(

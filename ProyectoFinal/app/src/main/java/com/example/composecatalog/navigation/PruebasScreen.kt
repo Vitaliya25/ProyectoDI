@@ -80,18 +80,6 @@ fun PruebasScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-//
-//        // Caja de búsqueda
-//        OutlinedTextField(
-//            value = pruebaSel,
-//            onValueChange = { pruebaSel = it },
-//            label = { Text("Buscar prueba...") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 16.dp),
-//            textStyle = TextStyle(fontSize = 18.sp, color = colorResource(R.color.azulTextoOscuro)),
-//        )
-
 
         // Caja de texto con un menú desplegable para seleccionar el tipo de prueba
         Box(

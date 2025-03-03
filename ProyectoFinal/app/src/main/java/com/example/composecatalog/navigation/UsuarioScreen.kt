@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.composecatalog.R
@@ -122,7 +123,11 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = edad, onValueChange = { edad = it },
-                singleLine = true
+                singleLine = true,
+                textStyle = TextStyle(
+                    fontSize = 22.sp, // Tamaño de la letra
+                    fontWeight = FontWeight.Normal
+                )
             )
         }
 
@@ -142,7 +147,11 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = peso, onValueChange = { peso = it },
-                singleLine = true
+                singleLine = true,
+                textStyle = TextStyle(
+                    fontSize = 22.sp, // Tamaño de la letra
+                    fontWeight = FontWeight.Normal
+                )
             )
         }
         Spacer(modifier = Modifier.weight(1f))
@@ -160,7 +169,11 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = altura, onValueChange = { altura = it },
-                singleLine = true
+                singleLine = true,
+                textStyle = TextStyle(
+                    fontSize = 22.sp, // Tamaño de la letra
+                    fontWeight = FontWeight.Normal
+                )
             )
         }
         Spacer(modifier = Modifier.weight(1f))
@@ -182,14 +195,14 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
                 enabled = true
             )
             Text(
-                text = "Hombre"
+                text = "Hombre", fontSize = 22.sp
             )
             Spacer(modifier = Modifier.width(8.dp))
             RadioButton(
                 selected = (sexo == "M"), onClick = { sexo = "M" }, enabled = true
             )
             Text(
-                text = "Mujer"
+                text = "Mujer", fontSize = 22.sp
             )
         }
         Spacer(modifier = Modifier.weight(1f))
@@ -207,7 +220,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
                 modifier = Modifier.clickable {
                     mostrarDialogoPruebas = true
                 },
-                text = "Mostrar pruebas realizadas", fontSize = 20.sp,
+                text = "Mostrar pruebas realizadas", fontSize = 25.sp,
                 color = colorResource(R.color.teal_700),
                 fontWeight = FontWeight.Bold,
             )
@@ -380,20 +393,20 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
                         // Mostrar el nombre de la prueba
                         Text(
                             text = "Prueba: ${prueba.nombre}",
-                            fontSize = 20.sp,
+                            fontSize = 25.sp,
                             fontWeight = FontWeight.Bold
                         )
 
                         // Mostrar el resultado
                         Text(
                             text = "Resultado: ${prueba.resultado}",
-                            fontSize = 18.sp
+                            fontSize = 22.sp
                         )
 
                         // Mostrar la nota (si está disponible)
                         Text(
                             text = "Nota: ${prueba.nota?.toString() ?: "N/A"}",  // Si la nota es nula, mostrar "N/A"
-                            fontSize = 18.sp
+                            fontSize = 22.sp
                         )
 
                         // Verificar si la fecha está vacía y mostrar un mensaje adecuado
@@ -401,7 +414,7 @@ fun UsuarioScreen(nombre: String, navigateToPruebas: (String) -> Unit, navigateB
                             if (prueba.fecha.isNotEmpty()) prueba.fecha else "Fecha no disponible"
                         Text(
                             text = "Fecha: $fechaTexto",
-                            fontSize = 18.sp
+                            fontSize = 22.sp
                         )
 
                         Spacer(modifier = Modifier.height(8.dp)) // Espaciado entre las pruebas
